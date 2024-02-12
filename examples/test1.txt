@@ -1,0 +1,9 @@
+( begin 
+    (+ 2 3) 
+    (define f (lambda (a b c) ( * 2 a b c)))
+    (f 2 3 2)
+    (define g ( f 4 2 ))
+    (g 3 )
+    (if (> 3 2) 1 2 )
+    (if (< 3 2) 1 2 )
+)

@@ -1,6 +1,8 @@
 // use std::io::Write;
 use std::fs;
 mod expression;
+mod global_env;
+mod operation;
 mod eval;
 use expression::RispExp;
 use std::rc::Rc;
@@ -69,7 +71,7 @@ fn parse_list(line: & Vec<&str>, b: usize) -> (RispExp, usize) {
 }
 
 fn main() {
-    let line = fs::read_to_string("C:\\Users\\15218\\work\\rust\\risp\\test.txt").unwrap();
+    let line = fs::read_to_string("examples\\test1.txt").unwrap();
     // let line = &line[..line.len() - 2] // only necessary when input from teminal
     //     .replace("(", " ( ")
     //     .replace(")", " ) ");
@@ -78,7 +80,7 @@ fn main() {
     let tem: Vec<&str> = tem.into_iter().filter(|x| x.len() > 0).collect();
     let (tree, _) = parse_list(&tem, 0);
     println!("{:?}", tree);
-    let mut env = eval::base_env();
+    let mut env = global_env::base_env();
     match eval::eval(&tree, &mut env, None) {
         RispExp::Number(k) => {
             println!("{}",k);

@@ -4,6 +4,7 @@ use std::rc::Rc;
 pub enum RispExp {
     Symbol(String),
     Number(f64),
+    Bool(bool),
     List(Vec<RispExp>),
     BaseFunc(fn(&Vec<RispExp>, &mut RispEnv, Option<&Rc<RispEnv>>) -> RispExp),
     // lambda in the ast
