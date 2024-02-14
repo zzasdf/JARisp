@@ -38,6 +38,44 @@ pub struct RispEnv {
     pub parent: Option<Rc<RispEnv>>,
 }
 
+pub fn show_RispExp(exp: &RispExp)->String{
+    match exp {
+        RispExp::Symbol(s) => {
+            s.clone()
+        }
+        RispExp::Number(n) => {
+            n.to_string()
+        }
+        RispExp::Bool(n) => {
+            n.to_string()
+        }
+        RispExp::Pointer(p) => {
+            show_RispExp(&(**p))
+        }
+        RispExp::RispList(n) => {
+            let mut re = "(".to_string();
+            for item in n{
+                re=re+" " + &show_RispExp(item);
+            }
+            re = re+" )";
+            re
+        }
+        RispExp::Lambda{args, proc} => {
+            let mut re = "( lambda (".to_string();
+            for item in &(**args){
+                re=re+" " + item;
+            }
+            re = re+" ) ";
+            re += &show_RispExp(&(**&proc));
+            re = re+" )";
+            re
+        }
+        _=>{
+            panic!("can not show {:?}", exp);
+        }
+    }
+}
+
 impl RispEnv {
     fn get_local(&self, s: &String) -> Option<&RispExp> {
         if self.data.contains_key(s) {

@@ -1,0 +1,9 @@
+( begin 
+    (define f (
+        lambda (x) (
+            (lambda (z) ( + x z) )
+        )
+    ))
+    (define g (f 2))
+    (g 3)
+)

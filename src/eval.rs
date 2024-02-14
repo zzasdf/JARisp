@@ -134,7 +134,7 @@ pub fn eval(tree: &RispExp, global_env: &mut RispEnv, local_env: Option<&Rc<Risp
                             RispExp::Number(f) => RispExp::Number(*f),
                             RispExp::Func(f) => RispExp::Func(Rc::clone(f)),
                             _ => {
-                                panic!("function not found")
+                                panic!("function {symbol} not found")
                             }
                         }
                     } else {

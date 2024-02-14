@@ -1,4 +1,4 @@
-use crate::expression::{RispEnv, RispExp};
+use crate::expression::{RispEnv, RispExp, show_RispExp};
 use crate::eval::eval;
 use std::collections::HashMap;
 use crate::operation;
@@ -13,15 +13,19 @@ fn begin(
         if i == 0 {
             continue;
         }
+        let ast = item.clone();
         let tem = eval(item, global_env, local_env);
         match &tem {
             RispExp::Number(k) => {
-                println!("{}", *k)
+                println!("The result of {} is {}", show_RispExp(&ast), *k);
             }
             RispExp::Symbol(k) => {
-                println!("{}", *k)
+                println!("The result of {} is {}", show_RispExp(&ast), *k);
+                // println!("{}", *k)
             }
-            _ => {}
+            _ => {
+                println!("Not output for {}", show_RispExp(&ast));
+            }
         };
     }
     return RispExp::Nothing();
