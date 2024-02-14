@@ -15,7 +15,7 @@ This program is just for getting familiar with rust, and is an extremely incompl
         (g 3)
     )
     ```
-    The output of the $(g\ 3)$ is 5 in this case because running $(g\ x)$ is eval to $(+\ x\ 2)$
+    The output of the $(g\ 3)$ is 5 in this case because running $(g\ x)$ is eval to $(+\ 2\ x)$
 * Currying: it works like this:
     ```
     ( begin 
@@ -37,7 +37,7 @@ and run with
 ```
 The output of the program will be
 ```
-Not output for ( define f ( lambda (  a b c ) ( * 2 a b c ) )
+Not output for ( define f ( lambda ( a b c ) ( * 2 a b c ) ) )
 The result of ( f 2 3 2 ) is 24
 Not output for ( define g ( f 4 2 ) )
 The result of ( g 3 ) is 48
