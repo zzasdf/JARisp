@@ -1,5 +1,13 @@
 # JARisp: Just AnotheR lisp Interpreter in rust  
-This program is just for getting familiar with rust, and is an extremely incomplete version of lisp interpreter. The functions I have implemented include:
+This project is just for getting familiar with rust, and is an extremely incomplete version of lisp interpreter. 
+
+This project mainly refers to these two post:
+
+[https://norvig.com/lispy.html](https://norvig.com/lispy.html)
+
+[https://stopa.io/post/222](https://stopa.io/post/222)
+
+The functions I have implemented include:
 * Simple calculation: like +,-,*,/
 * Condition control: only include "if"
 * Function definition and calling
