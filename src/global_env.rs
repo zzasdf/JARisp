@@ -27,6 +27,21 @@ fn begin(
     return RispExp::Nothing();
 }
 
+fn list(
+    tree: &Vec<RispExp>,
+    global_env: &mut RispEnv,
+    local_env: Option<&Rc<RispEnv>>,
+) -> RispExp {
+    let mut result: Vec<RispExp> = Vec::with_capacity(tree.len()-1);
+    for (i, item) in tree.iter().enumerate() {
+        if i == 0 {
+            continue;
+        }
+        result.push(eval(item, global_env, local_env));
+    }
+    return RispExp::List(result);
+}
+
 fn rif(
     tree: &Vec<RispExp>,
     global_env: &mut RispEnv,
@@ -78,6 +93,8 @@ pub fn base_env() -> RispEnv {
         .insert(String::from("if"), RispExp::BaseFunc(rif));
     re.data
         .insert(String::from("define"), RispExp::BaseFunc(define));
+    re.data
+        .insert(String::from("list"), RispExp::BaseFunc(list));
     //  re.data.insert(String::from("lambda"), RispExp::BaseFunc(lambda));
     re.data
         .insert(String::from("+"), RispExp::BaseFunc(operation::add));

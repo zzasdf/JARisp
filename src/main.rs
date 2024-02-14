@@ -67,11 +67,12 @@ fn parse_list(line: & Vec<&str>, b: usize) -> (RispExp, usize) {
         }
     }
     assert!(index<line.len());
-    return (RispExp::Pointer(Rc::new(RispExp::List(tree))), index + 1);
+    return (RispExp::Pointer(Rc::new(RispExp::RispList(tree))), index + 1);
 }
 
 fn main() {
-    let line = fs::read_to_string("examples\\test1.txt").unwrap();
+    let path = std::env::args().nth(1).expect("no path given");
+    let line = fs::read_to_string(path).unwrap();
     // let line = &line[..line.len() - 2] // only necessary when input from teminal
     //     .replace("(", " ( ")
     //     .replace(")", " ) ");
@@ -79,7 +80,7 @@ fn main() {
     let tem: Vec<&str> = line.split(' ').collect();
     let tem: Vec<&str> = tem.into_iter().filter(|x| x.len() > 0).collect();
     let (tree, _) = parse_list(&tem, 0);
-    println!("{:?}", tree);
+    // println!("{:?}", tree);
     let mut env = global_env::base_env();
     match eval::eval(&tree, &mut env, None) {
         RispExp::Number(k) => {

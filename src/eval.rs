@@ -111,7 +111,7 @@ fn eval_lambda(
 pub fn eval(tree: &RispExp, global_env: &mut RispEnv, local_env: Option<&Rc<RispEnv>>) -> RispExp {
     match tree {
         RispExp::Pointer(pointer) => match &(**pointer) {
-            RispExp::List(_) => eval(&(**pointer), global_env, local_env),
+            RispExp::RispList(_) => eval(&(**pointer), global_env, local_env),
             _ => RispExp::Pointer(Rc::clone(pointer)),
         },
         RispExp::Lambda { args, proc } => eval_lambda(&args, &proc, local_env),
@@ -145,7 +145,7 @@ pub fn eval(tree: &RispExp, global_env: &mut RispEnv, local_env: Option<&Rc<Risp
             }
         }
         RispExp::Number(k) => RispExp::Number(*k),
-        RispExp::List(lis) => return eval_list(lis, global_env, local_env),
+        RispExp::RispList(lis) => return eval_list(lis, global_env, local_env),
         _ => {
             panic!("not implemented")
         }

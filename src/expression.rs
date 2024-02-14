@@ -5,6 +5,7 @@ pub enum RispExp {
     Symbol(String),
     Number(f64),
     Bool(bool),
+    RispList(Vec<RispExp>),
     List(Vec<RispExp>),
     BaseFunc(fn(&Vec<RispExp>, &mut RispEnv, Option<&Rc<RispEnv>>) -> RispExp),
     // lambda in the ast
@@ -18,9 +19,6 @@ pub enum RispExp {
     Pointer(Rc<RispExp>),
     Nothing(),
 }
-// 我想用eval实现lambda的函数的调用
-// 这样需要保留一个完整的RispExp
-// 我想用eval实现lambda的函数的调用
 
 #[derive(Debug)]
 enum RispErr {
